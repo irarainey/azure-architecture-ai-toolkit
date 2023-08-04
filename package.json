@@ -11,13 +11,16 @@
   "main": "./dist/index.js",
   "scripts": {
     "esbuild-base": "esbuild ./src/index.ts --bundle --outfile=dist/index.js --format=cjs --platform=node",
-		"pack": "npm run esbuild-base --sourcemap && tsc -p ./ --emitDeclarationOnly --declaration",
+    "pack": "npm run esbuild-base --sourcemap && tsc -p ./ --emitDeclarationOnly --declaration",
     "build": "npm run lint && tsc -p ./ --declaration --sourceMap --declarationMap",
+    "start": "tsc && run-func dist/index.js main /home/ira/src/azure-architecture-ai-toolkit/images/sample-001.png",
     "lint": "eslint src --ext ts"
   },
   "dependencies": {
     "@azure/cognitiveservices-customvision-prediction": "^5.1.2",
     "axios": "^1.4.0",
+    "dotenv": "^16.3.1",
+    "run-func": "^3.0.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
