@@ -1,0 +1,32 @@
+{
+  "name": "azure-architecture-ai-toolkit",
+  "displayName": "Azure Architecture AI Toolkit",
+  "description": "A TypeScript helper library that uses AI services to help with Azure architecture-related functionality.",
+  "publisher": "irarainey",
+  "author": {
+    "name": "Ira Rainey",
+    "email": "ira.rainey@microsoft.com"
+  },
+  "version": "0.0.1",
+  "main": "./dist/index.js",
+  "scripts": {
+    "esbuild-base": "esbuild ./src/index.ts --bundle --outfile=dist/index.js --format=cjs --platform=node",
+		"pack": "npm run esbuild-base --sourcemap && tsc -p ./ --emitDeclarationOnly --declaration",
+    "build": "npm run lint && tsc -p ./ --declaration --sourceMap --declarationMap",
+    "lint": "eslint src --ext ts"
+  },
+  "dependencies": {
+    "@azure/cognitiveservices-customvision-prediction": "^5.1.2",
+    "axios": "^1.4.0",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.4.7",
+    "@types/uuid": "^9.0.2",
+    "@typescript-eslint/eslint-plugin": "^6.2.1",
+    "@typescript-eslint/parser": "^6.2.1",
+    "esbuild": "^0.18.17",
+    "eslint": "^8.46.0",
+    "typescript": "^5.1.6"
+  }
+}
