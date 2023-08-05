@@ -7,10 +7,7 @@ import { Connection } from "../types/connection";
 // List of objects to exclude from code generation
 const codeGenerationExcludeList: string[] = ["right-arrow", "left-arrow", "up-arrow", "down-arrow", "user"];
 
-export function detectObjectConnections(predictions: Prediction[]): string {
-	// Get the overlap threshold from the configuration
-	const overlapThreshold: number = 3;
-
+export function detectObjectConnections(predictions: Prediction[], overlapThreshold: number): string {
 	// Simplify the detected services into a new array of DetectedObject and give each one a unique id
 	const detectedObjects: DetectedObject[] = predictions.map((prediction) => ({
 		id: uuidv4(),

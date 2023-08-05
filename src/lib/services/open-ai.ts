@@ -1,17 +1,18 @@
 import axios from "axios";
 import { DetectedObject } from "../types/detected-object";
 import { IaCLanguage } from "../enums/iac-language";
+import { ToolkitConfig } from "../types/tookit-config";
 
 // Explain the services found in the diagram
-export async function explainServices(services: string): Promise<string> {
-	const apiVersion: string = "";
-	configureAxios();
+export async function explainServices(services: string, config: ToolkitConfig): Promise<string> {
+	// Configure AXIOS client
+	configureAxios(config);
 
 	// Filter out the response to only include the service names
 	const filteredServices = JSON.stringify(services);
 
 	// Call the OpenAI API to generate the explanation
-	const result = await axios.post(`/completions?api-version=${apiVersion}`, {
+	const result = await axios.post(`/completions?api-version=${config.openAIApiVersion}`, {
 		messages: [
 			{
 				role: "system",
@@ -35,9 +36,9 @@ export async function explainServices(services: string): Promise<string> {
 }
 
 // Generate infrastructure as code for the services found in the diagram
-export async function generateCode(services: string, language: IaCLanguage): Promise<string> {
-	const apiVersion: string = "";
-	configureAxios();
+export async function generateCode(services: string, language: IaCLanguage, config: ToolkitConfig): Promise<string> {
+	// Configure AXIOS client
+	configureAxios(config);
 
 	// Convert our JSON string back to an array of DetectedObject
 	const servicesCollection: DetectedObject[] = JSON.parse(services);
@@ -49,7 +50,7 @@ export async function generateCode(services: string, language: IaCLanguage): Pro
 	const filteredServices = JSON.stringify(servicesOnly.map((item) => item.objectType));
 
 	// Call the OpenAI API to generate the code
-	const result = await axios.post(`/completions?api-version=${apiVersion}`, {
+	const result = await axios.post(`/completions?api-version=${config.openAIApiVersion}`, {
 		messages: [
 			{
 				role: "system",
@@ -70,14 +71,9 @@ export async function generateCode(services: string, language: IaCLanguage): Pro
 	return result.data.choices[0].message.content;
 }
 
-function configureAxios() {
-	// Get all configuration settings
-	const openAiInstance: string = "";
-	const apiKey: string = "";
-	const deploymentName: string = "";
-
-	// Configure axios
-	axios.defaults.baseURL = `https://${openAiInstance}.openai.azure.com/openai/deployments/${deploymentName}/chat`;
-	axios.defaults.headers.common["api-key"] = apiKey!;
+// Configure AXIOS client
+function configureAxios(config: ToolkitConfig) {
+	axios.defaults.baseURL = `https://${config.openAIInstance}.openai.azure.com/openai/deployments/${config.openAIDeployment}/chat`;
+	axios.defaults.headers.common["api-key"] = config.openAIApiKey!;
 	axios.defaults.headers.post["Content-Type"] = "application/json";
 }
