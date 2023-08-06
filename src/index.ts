@@ -23,18 +23,18 @@ toolkit.initialise({
 
 // Detect services in diagram
 Promise.resolve(toolkit.detectServicesFromDiagram(path)).then((results) => {
-	console.log("///////////////////////////////////\n// Detection\n///////////////////////////////////\n");
+	console.log("\n///////////////////////////////////\n// Detection\n///////////////////////////////////\n");
 	console.log(results);
 });
 
 // Explain diagram
 Promise.resolve(toolkit.explainDiagram(path)).then((results) => {
-	console.log("///////////////////////////////////\n// Explanation\n///////////////////////////////////\n");
+	console.log("\n///////////////////////////////////\n// Explanation\n///////////////////////////////////\n");
 	console.log(results);
 });
 
 // Generate code from diagram
 Promise.resolve(toolkit.generateCodeFromDiagram(path, toolkit.IaCLanguage.Terraform)).then((results) => {
-	console.log("///////////////////////////////////\n// Generation\n///////////////////////////////////\n");
+	console.log("\n///////////////////////////////////\n// Generation\n///////////////////////////////////\n");
 	console.log(results);
 });

@@ -16,13 +16,13 @@ export async function explainServices(services: string, config: ToolkitConfig): 
 		messages: [
 			{
 				role: "system",
-				content: `You are an assistant that analyses an Azure architecture diagram as detailed in the following JSON array to enable you to describe it to a stakeholder.
-						- "connectedToParentOn" - This property determines where the connected object is located on the diagram in relation to the parent object.
-						- "directionOfDataFlow" - This property determines the direction of the data flow between the two services.
-						- "objectType" - This property determines the type of Azure service or a connector that connects two services as defined within the "connectedObjects" array.
-						- Do not mention the JSON array in the explanation.
-						- Do not mention in the explanation any Azure services that are not listed array.
-						- Services: ${filteredServices}`
+				content: `• Act as an assistant that analyses an Azure architecture diagram as detailed in the following JSON array to enable you to describe it to a stakeholder.
+						• "connectedToParentOn" - This property determines where the connected object is located on the diagram in relation to the parent object.
+						• "directionOfDataFlow" - This property determines the direction of the data flow between the two services.
+						• "objectType" - This property determines the type of Azure service or a connector that connects two services as defined within the "connectedObjects" array.
+						• Do not mention the JSON array in the explanation.
+						• Do not mention in the explanation any Azure services that are not listed array.
+						• JSON ###\n${filteredServices}\n###`
 			},
 			{
 				role: "user",
@@ -54,12 +54,13 @@ export async function generateCode(services: string, language: IaCLanguage, conf
 		messages: [
 			{
 				role: "system",
-				content: `You are an assistant that generates infrastructure as code for the Azure services detailed in the following JSON array
-							- Always use the latest version of the provider for the language specified. 
-							- Do not include any services that are not listed. 
-							- Do not include any code that is not the specified language.
-							- Services: ${filteredServices}`
-			},
+				content: `• Act as an assistant that generates infrastructure as code for the Azure services detailed in the following JSON array
+						• Always use the latest version of the provider for the language specified. 
+						• Do not include any services that are not listed. 
+						• Do not include any code that is not the specified language.
+						• Do not include anything that isn't code in the output.
+						• JSON ###\n${filteredServices}\n###`
+						},
 			{
 				role: "user",
 				content: `Generate a code file for the services ing ${language}`
