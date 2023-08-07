@@ -7,6 +7,10 @@
     "name": "Ira Rainey",
     "email": "ira.rainey@microsoft.com"
   },
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/irarainey/azure-architecture-ai-toolkit"
+	},  
   "version": "0.0.1",
   "main": "./dist/index.js",
   "scripts": {

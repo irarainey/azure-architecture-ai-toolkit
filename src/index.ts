@@ -2,8 +2,8 @@ import dotenv from "dotenv";
 import * as toolkit from "./azure-architecture-ai-toolkit/index";
 
 // Set the path for the image
-const localPath = "/home/ira/src/azure-architecture-ai-toolkit/images/sample-001.png";
-const remotePath = "https://raw.githubusercontent.com/irarainey/azure-architecture-ai-toolkit/d1a65d3a31c2eaf31d040531334d6a224654b71f/images/sample-001.png";
+const localPath = "/home/ira/src/azure-architecture-ai-toolkit/assets/architecture-samples/sample-001.png";
+const remotePath = "https://raw.githubusercontent.com/irarainey/azure-architecture-ai-toolkit/d1a65d3a31c2eaf31d040531334d6a224654b71f/assets/architecture-samples/sample-001.png";
 
 // Configure dotenv
 dotenv.config();
