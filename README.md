@@ -73,6 +73,25 @@ export const explainDiagram = async (pathToFile: string) => {
 }
 ```
 
+This would output something like the following:
+
+
+> The architecture diagram consists of several Azure services connected to each other using connectors. 
+> 
+> 1. The diagram includes an API management service, which is connected to a connector on the right and another connector on the left. The data flows from the API management service to both connectors.
+> 
+> 2. There is also a function app service, which is connected to a connector on the left, a connector below, and a connector on the right. The data flows from the function app service to the left and right connectors, and also downward to the connector below.
+> 
+> 3. A key vault service is connected to a connector above. The data flows from the key vault service to the connector above.
+> 
+> 4. A Cosmos DB service is connected to a connector on the left. The data flows from the Cosmos DB service to the connector on the left.
+> 
+> 5. There are two arrow connectors - a right arrow and a down arrow. The right arrow connects the API management service to the function app service on the left and to the user entity on the right. The down arrow connects the function app service to the user entity above and to the key vault service below.
+> 
+> 6. The user entity is connected to a connector on the right. The data flows from the user entity to the connector on the right.
+> 
+> In summary, the architecture diagram shows the flow of data between various Azure services using connectors, with the API management service and function app service being central to the data flow.
+
 ## 3. Azure Architecture Infrastructure-as-Code Generation
 This functionality allows you to generate either a Terraform or Bicep code template from the specified architecture diagram. This function internally uses the detection functionality above, and then uses Azure OpenAI to generate IaC for the services the diagram. To use this functionality, you need to have an OpenAI API key.
 
