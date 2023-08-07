@@ -10,7 +10,7 @@
   "version": "0.0.1",
   "main": "./dist/index.js",
   "scripts": {
-    "esbuild-base": "esbuild ./src/lib/azure-architecture-ai-toolkit.ts --bundle --outfile=dist/azure-architecture-ai-toolkit.js --format=cjs --platform=node",
+    "esbuild-base": "esbuild ./src/azure-architecture-ai-toolkit/index.ts --bundle --outfile=dist/index.js --format=cjs --platform=node --minify",
     "pack": "npm run esbuild-base --sourcemap && tsc -p ./tsconfig.pack.json",
     "build": "npm run lint && tsc -p ./ --declaration --sourceMap --declarationMap",
     "start": "npm run build && node out/index.js",
