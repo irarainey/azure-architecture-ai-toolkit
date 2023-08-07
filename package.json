@@ -14,10 +14,8 @@
   "version": "0.0.2",
   "main": "./dist/index.js",
   "scripts": {
-    "esbuild-base": "esbuild ./src/index.ts --bundle --outfile=dist/index.js --format=cjs --platform=node --minify",
-    "pack": "npm run esbuild-base --sourcemap && tsc -p ./",
-    "build": "npm run lint && tsc -p ./ --declaration --sourceMap --declarationMap",
-    "start": "npm run build && node out/index.js",
+    "esbuild-base": "esbuild ./src/index.ts --bundle --outfile=./dist/index.js --format=cjs --platform=node",
+    "build": "npm run esbuild-base && tsc --emitDeclarationOnly --declaration",
     "lint": "eslint src --ext ts"
   },
   "dependencies": {
