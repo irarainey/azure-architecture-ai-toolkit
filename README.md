@@ -80,11 +80,11 @@ This would output something like the following:
 
 > At the center of the diagram is an API Management service, which is connected to two other objects - a Function App and a User. The connection lines indicate that data flows from the User to the API Management service and from the API Management service to the Function App.
 
-The Function App is also connected to two other services - a Key Vault, and a Cosmos DB. The Function App receives data from the API Management service, and then sends data to the Key Vault and Cosmos DB. The Key Vault is connected to the Function App, indicating that it stores sensitive information that is accessed by both services.
+> The Function App is also connected to two other services - a Key Vault, and a Cosmos DB. The Function App receives data from the API Management service, and then sends > data to the Key Vault and Cosmos DB. The Key Vault is connected to the Function App, indicating that it stores sensitive information that is accessed by both services.
 
-The Cosmos DB is connected to the Function App, indicating that the Function App retrieves data from or sends data to the Cosmos DB.
+> The Cosmos DB is connected to the Function App, indicating that the Function App retrieves data from or sends data to the Cosmos DB.
 
-Overall, this diagram represents a system architecture where data flows from the API Management service to the Function App and User, and the Function App interacts with the Key Vault and Cosmos DB.
+> Overall, this diagram represents a system architecture where data flows from the API Management service to the Function App and User, and the Function App interacts with the Key Vault and Cosmos DB.
 
 ## 3. Azure Architecture Infrastructure-as-Code Generation
 This functionality allows you to generate either a Terraform or Bicep code template from the specified architecture diagram. This function internally uses the detection functionality above, and then uses Azure OpenAI to generate IaC for the services the diagram. To use this functionality, you need to have an OpenAI API key.
