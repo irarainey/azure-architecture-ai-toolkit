@@ -13,7 +13,7 @@ export async function explainServices(services: string, config: ToolkitConfig): 
 
 	// Call the OpenAI API to generate the explanation
 	const result = await axios.post(`/completions?api-version=${config.openAIApiVersion}`, {
-		temperature: 0.1,
+		temperature: 0.9,
 		messages: [
 			{
 				role: "system",
@@ -23,8 +23,9 @@ export async function explainServices(services: string, config: ToolkitConfig): 
 							• "connectedToParentOn" determines where the connected object is located on the diagram in relation to the parent object.
 							• "directionOfDataFlow" determines the direction of the data flow between the two services.
 							• "objectType" - determines the type of Azure service or a connector that connects two services as defined within the "connectedObjects" array.
+							• Only talk about the services and what the overal architecture shows.
 							• Do not mention the JSON array in the explanation.
-							• Do not mention rectangles in the response.
+							• Do not mention connectors in the response.
 							• Do not mention Azure services that are not listed array.`
 			},
 			{
