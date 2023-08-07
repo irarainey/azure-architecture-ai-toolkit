@@ -1,41 +1,27 @@
-import dotenv from "dotenv";
-import * as toolkit from "./azure-architecture-ai-toolkit/index";
+import { ToolkitConfig } from "./types/tookit-config"
+import { IaCLanguage } from "./enums/iac-language";
+import { detectFromDiagram } from "./services/custom-vision";
+import { explainServices, generateCode } from "./services/open-ai";
 
-// Set the path for the image
-const localPath = "/home/ira/src/azure-architecture-ai-toolkit/assets/architecture-samples/sample-001.png";
-const remotePath = "https://raw.githubusercontent.com/irarainey/azure-architecture-ai-toolkit/d1a65d3a31c2eaf31d040531334d6a224654b71f/assets/architecture-samples/sample-001.png";
+export { ToolkitConfig } from "./types/tookit-config";
+export { IaCLanguage } from "./enums/iac-language";
 
-// Configure dotenv
-dotenv.config();
+let _config: ToolkitConfig;
 
-// Initialise the toolkit
-toolkit.initialise({
-	openAIApiKey: process.env.OPEN_AI_API_KEY!,
-	openAIInstance: process.env.OPEN_AI_INSTANCE!,
-	openAIApiVersion: process.env.OPEN_AI_API_VERSION!,
-	openAIDeployment: process.env.OPEN_AI_DEPLOYMENT!,
-	customVisionPredictionKey: process.env.CUSTOM_VISION_PREDICTION_KEY!,
-	customVisionPredictionInstance: process.env.CUSTOM_VISION_PREDICTION_INSTANCE!,
-	customVisionPublishIterationName: process.env.CUSTOM_VISION_PUBLISH_ITERATION_NAME!,
-	customVisionProjectId: process.env.CUSTOM_VISION_PROJECT_ID!,
-	customVisionDetectionThreshold: 35,
-	customVisionOverlapThreshold: 3
-});
+export function initialise(config: ToolkitConfig): void {
+	_config = config;
+}
 
-// Detect services in diagram
-Promise.resolve(toolkit.detectServicesFromDiagram(localPath)).then((results) => {
-	console.log("\n///////////////////////////////////\n// Detection\n///////////////////////////////////\n");
-	console.log(results);
-});
+export async function detectServicesFromDiagram(path: string): Promise<string> {
+	return await detectFromDiagram(path, _config);
+}
 
-// Explain diagram
-Promise.resolve(toolkit.explainDiagram(localPath)).then((results) => {
-	console.log("\n///////////////////////////////////\n// Explanation\n///////////////////////////////////\n");
-	console.log(results);
-});
+export async function explainDiagram(path: string): Promise<string> {
+	const results: string = await detectFromDiagram(path, _config);
+	return await explainServices(results, _config);
+}
 
-// Generate code from diagram
-Promise.resolve(toolkit.generateCodeFromDiagram(localPath, toolkit.IaCLanguage.Terraform)).then((results) => {
-	console.log("\n///////////////////////////////////\n// Generation\n///////////////////////////////////\n");
-	console.log(results);
-});
+export async function generateCodeFromDiagram(path: string, language: IaCLanguage): Promise<string> {
+	const results: string = await detectFromDiagram(path, _config);
+	return await generateCode(results, language, _config);
+}

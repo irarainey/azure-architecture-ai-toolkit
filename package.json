@@ -7,15 +7,15 @@
     "name": "Ira Rainey",
     "email": "ira.rainey@microsoft.com"
   },
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/irarainey/azure-architecture-ai-toolkit"
-	},  
-  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/irarainey/azure-architecture-ai-toolkit"
+  },
+  "version": "0.0.2",
   "main": "./dist/index.js",
   "scripts": {
-    "esbuild-base": "esbuild ./src/azure-architecture-ai-toolkit/index.ts --bundle --outfile=dist/index.js --format=cjs --platform=node --minify",
-    "pack": "npm run esbuild-base --sourcemap && tsc -p ./tsconfig.pack.json",
+    "esbuild-base": "esbuild ./src/index.ts --bundle --outfile=dist/index.js --format=cjs --platform=node --minify",
+    "pack": "npm run esbuild-base --sourcemap && tsc -p ./",
     "build": "npm run lint && tsc -p ./ --declaration --sourceMap --declarationMap",
     "start": "npm run build && node out/index.js",
     "lint": "eslint src --ext ts"
@@ -23,7 +23,6 @@
   "dependencies": {
     "@azure/cognitiveservices-customvision-prediction": "^5.1.2",
     "axios": "^1.4.0",
-    "dotenv": "^16.3.1",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

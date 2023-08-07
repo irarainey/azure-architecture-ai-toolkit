@@ -6,7 +6,7 @@ The Azure Architecture AI toolkit is a helper library, written in TypeScript, th
 npm install azure-architecture-ai-toolkit
 ```
 
-The sample withing this repository using environment variables to hold all the relevant configuration values. To set this up create a new environment file called `.env` and add the following:
+Once the toolkit is installed create a new environment file called `.env` and add the following:
 
 ```bash
 OPEN_AI_API_KEY=<openai-api-key>
@@ -19,6 +19,29 @@ CUSTOM_VISION_PROJECT_ID=<custom-vision-project-id>
 CUSTOM_VISION_PUBLISH_ITERATION_NAME=<custom-vision-model-iteration-name>
 ```
 
+In your code, you can then initialise the toolkit as follows:
+
+```typescript
+import dotenv from "dotenv";
+
+// Configure dotenv
+dotenv.config();
+
+// Initialise the toolkit
+toolkit.initialise({
+	openAIApiKey: process.env.OPEN_AI_API_KEY!,
+	openAIInstance: process.env.OPEN_AI_INSTANCE!,
+	openAIApiVersion: process.env.OPEN_AI_API_VERSION!,
+	openAIDeployment: process.env.OPEN_AI_DEPLOYMENT!,
+	customVisionPredictionKey: process.env.CUSTOM_VISION_PREDICTION_KEY!,
+	customVisionPredictionInstance: process.env.CUSTOM_VISION_PREDICTION_INSTANCE!,
+	customVisionPublishIterationName: process.env.CUSTOM_VISION_PUBLISH_ITERATION_NAME!,
+	customVisionProjectId: process.env.CUSTOM_VISION_PROJECT_ID!,
+	customVisionDetectionThreshold: 35,
+	customVisionOverlapThreshold: 3
+});
+```
+
 Currently, the library supports the following functionality:
 
 ## 1. Azure Architecture Diagram Service Detection
@@ -28,8 +51,6 @@ This functionality allows you to detect the Azure services used in an architectu
 
 ### 1.1. Detect Azure Services in an Architecture Diagram
 ```typescript
-import * as toolkit from "./azure-architecture-ai-toolkit/index";
-
 export const detectServicesFromDiagram = async (pathToFile: string) => {
     const result = await toolkit.detectServicesFromDiagram(pathToFile);
     console.log(result);
@@ -45,8 +66,6 @@ This functionality allows you to generate a plain English explanation for an arc
 This function takes in a path to a file, either local or remotely hosted, and returns a plain English explanation of the diagram.
 
 ```typescript
-import * as toolkit from "./azure-architecture-ai-toolkit/index";
-
 export const explainDiagram = async (pathToFile: string) => {
     const result = await toolkit.explainDiagram(pathToFile);
     console.log(result);
@@ -61,8 +80,6 @@ This functionality allows you to generate either a Terraform or Bicep code templ
 This function takes in a path to a file, either local or remotely hosted, and returns a Terraform template for the services detected within the architecture diagram.
 
 ```typescript
-import * as toolkit from "./azure-architecture-ai-toolkit/index";
-
 export const generateCodeFromDiagram = async (pathToFile: string) => {
     const result = await toolkit.generateCodeFromDiagram(pathToFile, toolkit.IaCLanguage.Terraform);
     console.log(result);
@@ -74,8 +91,6 @@ export const generateCodeFromDiagram = async (pathToFile: string) => {
 This function takes in a path to a file, either local or remotely hosted, and returns a Bicep template for the services detected within the architecture diagram.
 
 ```typescript
-import * as toolkit from "./azure-architecture-ai-toolkit/index";
-
 export const generateCodeFromDiagram = async (pathToFile: string) => {
     const result = await toolkit.generateCodeFromDiagram(pathToFile, toolkit.IaCLanguage.Bicep);
     console.log(result);
