@@ -2,7 +2,8 @@ import dotenv from "dotenv";
 import * as toolkit from "./lib/azure-architecture-ai-toolkit";
 
 // Set the path for the image
-const path = "/home/ira/src/azure-architecture-ai-toolkit/images/sample-001.png";
+const localPath = "/home/ira/src/azure-architecture-ai-toolkit/images/sample-001.png";
+const remotePath = "https://raw.githubusercontent.com/irarainey/azure-architecture-ai-toolkit/d1a65d3a31c2eaf31d040531334d6a224654b71f/images/sample-001.png";
 
 // Configure dotenv
 dotenv.config();
@@ -22,19 +23,19 @@ toolkit.initialise({
 });
 
 // Detect services in diagram
-Promise.resolve(toolkit.detectServicesFromDiagram(path)).then((results) => {
+Promise.resolve(toolkit.detectServicesFromDiagram(localPath)).then((results) => {
 	console.log("\n///////////////////////////////////\n// Detection\n///////////////////////////////////\n");
 	console.log(results);
 });
 
 // Explain diagram
-Promise.resolve(toolkit.explainDiagram(path)).then((results) => {
+Promise.resolve(toolkit.explainDiagram(localPath)).then((results) => {
 	console.log("\n///////////////////////////////////\n// Explanation\n///////////////////////////////////\n");
 	console.log(results);
 });
 
 // Generate code from diagram
-Promise.resolve(toolkit.generateCodeFromDiagram(path, toolkit.IaCLanguage.Terraform)).then((results) => {
+Promise.resolve(toolkit.generateCodeFromDiagram(localPath, toolkit.IaCLanguage.Terraform)).then((results) => {
 	console.log("\n///////////////////////////////////\n// Generation\n///////////////////////////////////\n");
 	console.log(results);
 });
