@@ -23,6 +23,7 @@ In your code, you can then initialise the toolkit as follows:
 
 ```typescript
 import dotenv from "dotenv";
+import * as toolkit from "azure-architecture-ai-toolkit";
 
 // Configure dotenv
 dotenv.config();
