@@ -58,7 +58,7 @@ export async function generateCode(services: string, language: IaCLanguage, conf
 
 	// Call the OpenAI API to generate the code
 	const result = await axios.post(`/completions?api-version=${config.openAIApiVersion}`, {
-		temperature: 0.1,
+		temperature: 0,
 		messages: [
 			{
 				role: "system",
