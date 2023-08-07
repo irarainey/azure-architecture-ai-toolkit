@@ -13,6 +13,7 @@ export async function explainServices(services: string, config: ToolkitConfig): 
 
 	// Call the OpenAI API to generate the explanation
 	const result = await axios.post(`/completions?api-version=${config.openAIApiVersion}`, {
+		temperature: 0.1,
 		messages: [
 			{
 				role: "system",
@@ -21,7 +22,8 @@ export async function explainServices(services: string, config: ToolkitConfig): 
 						• "directionOfDataFlow" - This property determines the direction of the data flow between the two services.
 						• "objectType" - This property determines the type of Azure service or a connector that connects two services as defined within the "connectedObjects" array.
 						• Do not mention the JSON array in the explanation.
-						• Do not mention in the explanation any Azure services that are not listed array.
+						• Do not include rectangles in the response.
+						• Do not include Azure services that are not listed array in the response.
 						• JSON ###\n${filteredServices}\n###`
 			},
 			{
@@ -51,6 +53,7 @@ export async function generateCode(services: string, language: IaCLanguage, conf
 
 	// Call the OpenAI API to generate the code
 	const result = await axios.post(`/completions?api-version=${config.openAIApiVersion}`, {
+		temperature: 0.1,
 		messages: [
 			{
 				role: "system",
