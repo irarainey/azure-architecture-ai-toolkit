@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import * as toolkit from "./lib/azure-architecture-ai-toolkit";
+import * as toolkit from "./azure-architecture-ai-toolkit/index";
 
 // Set the path for the image
 const localPath = "/home/ira/src/azure-architecture-ai-toolkit/images/sample-001.png";
