@@ -68,7 +68,9 @@ export async function generateCode(services: string, language: IaCLanguage, conf
 							• Always use the latest version of the provider for the language specified. 
 							• Do not include any services that are not listed. 
 							• Do not include any code that is not the specified language.
-							• Do not include anything that isn't code in the JSON array.`
+							• Do not include anything that isn't code in the JSON array.
+							• Do not include any markdown in the output.
+							• Do not include any notes or comments in or around the code.`
 						},
 			{
 				role: "user",
